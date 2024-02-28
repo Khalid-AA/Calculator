@@ -94,6 +94,11 @@ public class calculator_gui extends javax.swing.JFrame {
 
         tf_calculation.setFont(new java.awt.Font("Segoe UI", 0, 36)); // NOI18N
         tf_calculation.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
+        tf_calculation.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                tf_calculationActionPerformed(evt);
+            }
+        });
 
         tf_answer.setEditable(false);
         tf_answer.setFont(new java.awt.Font("Segoe UI", 1, 16)); // NOI18N
@@ -644,6 +649,10 @@ public class calculator_gui extends javax.swing.JFrame {
        get_previous = "";
        tf_calculation.setText(get_previous);        // TODO add your handling code here:
     }//GEN-LAST:event_btn_clearActionPerformed
+
+    private void tf_calculationActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tf_calculationActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_tf_calculationActionPerformed
 
     /**
      * @param args the command line arguments
