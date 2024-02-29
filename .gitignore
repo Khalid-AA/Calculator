@@ -2,4 +2,4 @@
 private/
 
 # ignore private.xml file 
-nbproject\private\private.xml
+nbproject/private/private.xml
