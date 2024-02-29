@@ -1,2 +1,5 @@
+# ignore all files in any directory named private
 private/
-private/private.xml
+
+# ignore private.xml file 
+nbproject\private\private.xml
