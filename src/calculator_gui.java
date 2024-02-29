@@ -1,16 +1,10 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
- */
+import java.beans.Expression;
 
-/**
- *
- * @author kahmed7
- */
+
 public class calculator_gui extends javax.swing.JFrame {
 
     /**
-     * Creates new form calculator_gui
+     * Creates new form GUI
      */
     public calculator_gui() {
         initComponents();
@@ -59,6 +53,7 @@ public class calculator_gui extends javax.swing.JFrame {
         btn_brack_op = new javax.swing.JButton();
         btn_percentage = new javax.swing.JButton();
         btn_brack_cl = new javax.swing.JButton();
+        btn_backspc = new javax.swing.JButton();
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -90,13 +85,30 @@ public class calculator_gui extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setResizable(false);
 
+        jPanel2.setBackground(new java.awt.Color(102, 102, 102));
+
+        jPanel3.setBackground(new java.awt.Color(102, 102, 102));
         jPanel3.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
+        tf_calculation.setBackground(new java.awt.Color(51, 51, 51));
         tf_calculation.setFont(new java.awt.Font("Segoe UI", 0, 36)); // NOI18N
+        tf_calculation.setForeground(new java.awt.Color(255, 255, 255));
         tf_calculation.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
+        tf_calculation.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                tf_calculationActionPerformed(evt);
+            }
+        });
 
         tf_answer.setEditable(false);
+        tf_answer.setBackground(new java.awt.Color(51, 51, 51));
         tf_answer.setFont(new java.awt.Font("Segoe UI", 1, 16)); // NOI18N
+        tf_answer.setForeground(new java.awt.Color(255, 255, 255));
+        tf_answer.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                tf_answerActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
@@ -114,17 +126,21 @@ public class calculator_gui extends javax.swing.JFrame {
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(tf_calculation, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(tf_answer, javax.swing.GroupLayout.DEFAULT_SIZE, 45, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(tf_answer, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
 
-        jPanel4.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        jPanel4.setBackground(new java.awt.Color(102, 102, 102));
+        jPanel4.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 255, 255), 3));
 
+        btn_clear_history.setBackground(new java.awt.Color(255, 102, 102));
         btn_clear_history.setFont(new java.awt.Font("Segoe UI", 1, 36)); // NOI18N
+        btn_clear_history.setForeground(new java.awt.Color(255, 255, 255));
         btn_clear_history.setText("Clear");
-        btn_clear_history.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        btn_clear_history.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
         btn_clear_history.setBorderPainted(false);
+        btn_clear_history.setFocusPainted(false);
         btn_clear_history.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btn_clear_historyActionPerformed(evt);
@@ -137,8 +153,8 @@ public class calculator_gui extends javax.swing.JFrame {
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel4Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(btn_clear_history, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(176, Short.MAX_VALUE))
+                .addComponent(btn_clear_history, javax.swing.GroupLayout.DEFAULT_SIZE, 366, Short.MAX_VALUE)
+                .addContainerGap())
         );
         jPanel4Layout.setVerticalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -148,12 +164,20 @@ public class calculator_gui extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
+        jPanel5.setBackground(new java.awt.Color(102, 102, 102));
         jPanel5.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
+        btn_equals.setBackground(new java.awt.Color(102, 204, 0));
         btn_equals.setFont(new java.awt.Font("Segoe UI", 1, 36)); // NOI18N
+        btn_equals.setForeground(new java.awt.Color(255, 255, 255));
         btn_equals.setText("=");
         btn_equals.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
         btn_equals.setBorderPainted(false);
+        btn_equals.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_equalsActionPerformed(evt);
+            }
+        });
 
         btn_zero.setFont(new java.awt.Font("Segoe UI", 1, 36)); // NOI18N
         btn_zero.setText("0");
@@ -165,7 +189,8 @@ public class calculator_gui extends javax.swing.JFrame {
             }
         });
 
-        btn_dot.setFont(new java.awt.Font("Segoe UI", 1, 36)); // NOI18N
+        btn_dot.setFont(new java.awt.Font("Segoe UI", 0, 36)); // NOI18N
+        btn_dot.setForeground(new java.awt.Color(255, 51, 102));
         btn_dot.setText(".");
         btn_dot.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
         btn_dot.setBorderPainted(false);
@@ -205,7 +230,8 @@ public class calculator_gui extends javax.swing.JFrame {
             }
         });
 
-        btn_plus.setFont(new java.awt.Font("Segoe UI", 1, 36)); // NOI18N
+        btn_plus.setFont(new java.awt.Font("Segoe UI", 0, 36)); // NOI18N
+        btn_plus.setForeground(new java.awt.Color(255, 51, 102));
         btn_plus.setText("+");
         btn_plus.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
         btn_plus.setBorderPainted(false);
@@ -245,7 +271,8 @@ public class calculator_gui extends javax.swing.JFrame {
             }
         });
 
-        btn_minus.setFont(new java.awt.Font("Segoe UI", 1, 36)); // NOI18N
+        btn_minus.setFont(new java.awt.Font("Segoe UI", 0, 36)); // NOI18N
+        btn_minus.setForeground(new java.awt.Color(255, 51, 102));
         btn_minus.setText("-");
         btn_minus.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
         btn_minus.setBorderPainted(false);
@@ -257,7 +284,7 @@ public class calculator_gui extends javax.swing.JFrame {
 
         btn_seven.setFont(new java.awt.Font("Segoe UI", 1, 36)); // NOI18N
         btn_seven.setText("7");
-        btn_seven.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        btn_seven.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.LOWERED, null, new java.awt.Color(255, 255, 255), null, null));
         btn_seven.setBorderPainted(false);
         btn_seven.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -277,7 +304,7 @@ public class calculator_gui extends javax.swing.JFrame {
 
         btn_nine.setFont(new java.awt.Font("Segoe UI", 1, 36)); // NOI18N
         btn_nine.setText("9");
-        btn_nine.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        btn_nine.setBorder(javax.swing.BorderFactory.createEtchedBorder());
         btn_nine.setBorderPainted(false);
         btn_nine.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -285,7 +312,8 @@ public class calculator_gui extends javax.swing.JFrame {
             }
         });
 
-        btn_mult.setFont(new java.awt.Font("Segoe UI", 1, 36)); // NOI18N
+        btn_mult.setFont(new java.awt.Font("Segoe UI", 0, 36)); // NOI18N
+        btn_mult.setForeground(new java.awt.Color(255, 51, 102));
         btn_mult.setText("×");
         btn_mult.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
         btn_mult.setBorderPainted(false);
@@ -295,22 +323,23 @@ public class calculator_gui extends javax.swing.JFrame {
             }
         });
 
-        btn_sin.setFont(new java.awt.Font("Segoe UI", 1, 36)); // NOI18N
+        btn_sin.setFont(new java.awt.Font("Segoe UI", 0, 36)); // NOI18N
         btn_sin.setText("sin");
         btn_sin.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
         btn_sin.setBorderPainted(false);
 
-        btn_cos.setFont(new java.awt.Font("Segoe UI", 1, 36)); // NOI18N
+        btn_cos.setFont(new java.awt.Font("Segoe UI", 0, 36)); // NOI18N
         btn_cos.setText("cos");
         btn_cos.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
         btn_cos.setBorderPainted(false);
 
-        btn_tan.setFont(new java.awt.Font("Segoe UI", 1, 36)); // NOI18N
+        btn_tan.setFont(new java.awt.Font("Segoe UI", 0, 36)); // NOI18N
         btn_tan.setText("tan");
         btn_tan.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
         btn_tan.setBorderPainted(false);
 
-        btn_div.setFont(new java.awt.Font("Segoe UI", 1, 36)); // NOI18N
+        btn_div.setFont(new java.awt.Font("Segoe UI", 0, 36)); // NOI18N
+        btn_div.setForeground(new java.awt.Color(255, 51, 102));
         btn_div.setText("÷");
         btn_div.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
         btn_div.setBorderPainted(false);
@@ -320,7 +349,9 @@ public class calculator_gui extends javax.swing.JFrame {
             }
         });
 
+        btn_clear.setBackground(new java.awt.Color(255, 102, 102));
         btn_clear.setFont(new java.awt.Font("Segoe UI", 1, 36)); // NOI18N
+        btn_clear.setForeground(new java.awt.Color(255, 255, 255));
         btn_clear.setText("C");
         btn_clear.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
         btn_clear.setBorderPainted(false);
@@ -330,7 +361,8 @@ public class calculator_gui extends javax.swing.JFrame {
             }
         });
 
-        btn_brack_op.setFont(new java.awt.Font("Segoe UI", 1, 36)); // NOI18N
+        btn_brack_op.setFont(new java.awt.Font("Segoe UI", 0, 36)); // NOI18N
+        btn_brack_op.setForeground(new java.awt.Color(255, 51, 102));
         btn_brack_op.setText("(");
         btn_brack_op.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
         btn_brack_op.setBorderPainted(false);
@@ -340,7 +372,8 @@ public class calculator_gui extends javax.swing.JFrame {
             }
         });
 
-        btn_percentage.setFont(new java.awt.Font("Segoe UI", 1, 36)); // NOI18N
+        btn_percentage.setFont(new java.awt.Font("Segoe UI", 0, 36)); // NOI18N
+        btn_percentage.setForeground(new java.awt.Color(255, 51, 102));
         btn_percentage.setText("%");
         btn_percentage.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
         btn_percentage.setBorderPainted(false);
@@ -350,13 +383,31 @@ public class calculator_gui extends javax.swing.JFrame {
             }
         });
 
-        btn_brack_cl.setFont(new java.awt.Font("Segoe UI", 1, 36)); // NOI18N
+        btn_brack_cl.setFont(new java.awt.Font("Segoe UI", 0, 36)); // NOI18N
+        btn_brack_cl.setForeground(new java.awt.Color(255, 51, 102));
         btn_brack_cl.setText(")");
         btn_brack_cl.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
         btn_brack_cl.setBorderPainted(false);
         btn_brack_cl.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btn_brack_clActionPerformed(evt);
+            }
+        });
+
+        btn_backspc.setBackground(new java.awt.Color(255, 102, 102));
+        btn_backspc.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
+        btn_backspc.setForeground(new java.awt.Color(255, 255, 255));
+        btn_backspc.setText("BACK");
+        btn_backspc.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        btn_backspc.setBorderPainted(false);
+        btn_backspc.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_backspcActionPerformed(evt);
+            }
+        });
+        btn_backspc.addPropertyChangeListener(new java.beans.PropertyChangeListener() {
+            public void propertyChange(java.beans.PropertyChangeEvent evt) {
+                btn_backspcPropertyChange(evt);
             }
         });
 
@@ -368,17 +419,19 @@ public class calculator_gui extends javax.swing.JFrame {
                 .addContainerGap(12, Short.MAX_VALUE)
                 .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(jPanel5Layout.createSequentialGroup()
-                        .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(btn_one, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(btn_percentage, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(18, 18, 18)
+                        .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addGroup(jPanel5Layout.createSequentialGroup()
-                                .addComponent(btn_one, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
                                 .addComponent(btn_two, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(18, 18, 18)
                                 .addComponent(btn_three, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(18, 18, 18)
                                 .addComponent(btn_plus, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(jPanel5Layout.createSequentialGroup()
-                                .addComponent(btn_zero, javax.swing.GroupLayout.PREFERRED_SIZE, 168, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(btn_zero, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addGap(18, 18, 18)
                                 .addComponent(btn_dot, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(18, 18, 18)
@@ -395,23 +448,13 @@ public class calculator_gui extends javax.swing.JFrame {
                                 .addGap(18, 18, 18)
                                 .addComponent(btn_mult, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(jPanel5Layout.createSequentialGroup()
-                                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addGroup(jPanel5Layout.createSequentialGroup()
-                                        .addComponent(btn_clear, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGap(18, 18, 18)
-                                        .addComponent(btn_brack_op, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGap(18, 18, 18)
-                                        .addComponent(btn_brack_cl, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addGroup(jPanel5Layout.createSequentialGroup()
-                                        .addComponent(btn_sin, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGap(18, 18, 18)
-                                        .addComponent(btn_cos, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGap(18, 18, 18)
-                                        .addComponent(btn_tan, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addComponent(btn_sin, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(18, 18, 18)
-                                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(btn_div, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(btn_percentage, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addComponent(btn_cos, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(btn_tan, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(btn_div, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel5Layout.createSequentialGroup()
                                 .addComponent(btn_four, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(18, 18, 18)
@@ -419,19 +462,27 @@ public class calculator_gui extends javax.swing.JFrame {
                                 .addGap(18, 18, 18)
                                 .addComponent(btn_six, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(18, 18, 18)
-                                .addComponent(btn_minus, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addComponent(btn_minus, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(jPanel5Layout.createSequentialGroup()
+                                .addComponent(btn_clear, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(btn_backspc, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(23, 23, 23)
+                                .addComponent(btn_brack_op, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(btn_brack_cl, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addGap(19, 19, 19))))
         );
         jPanel5Layout.setVerticalGroup(
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel5Layout.createSequentialGroup()
-                .addContainerGap(17, Short.MAX_VALUE)
+                .addContainerGap(9, Short.MAX_VALUE)
                 .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(btn_clear, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(btn_brack_op, javax.swing.GroupLayout.PREFERRED_SIZE, 69, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(btn_brack_cl, javax.swing.GroupLayout.PREFERRED_SIZE, 69, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(btn_percentage, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 69, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(btn_backspc, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 68, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btn_sin, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -460,7 +511,8 @@ public class calculator_gui extends javax.swing.JFrame {
                 .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(btn_zero, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(btn_dot, javax.swing.GroupLayout.PREFERRED_SIZE, 69, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(btn_dot, javax.swing.GroupLayout.PREFERRED_SIZE, 69, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(btn_percentage, javax.swing.GroupLayout.PREFERRED_SIZE, 69, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(btn_equals, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18))
         );
@@ -470,7 +522,6 @@ public class calculator_gui extends javax.swing.JFrame {
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                .addContainerGap()
                 .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -479,11 +530,11 @@ public class calculator_gui extends javax.swing.JFrame {
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -645,6 +696,31 @@ public class calculator_gui extends javax.swing.JFrame {
        tf_calculation.setText(get_previous);        // TODO add your handling code here:
     }//GEN-LAST:event_btn_clearActionPerformed
 
+    private void tf_calculationActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tf_calculationActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_tf_calculationActionPerformed
+
+    private void tf_answerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tf_answerActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_tf_answerActionPerformed
+
+    private void btn_equalsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_equalsActionPerformed
+        String get_expression = tf_calculation.getText();
+        
+    }//GEN-LAST:event_btn_equalsActionPerformed
+
+    private void btn_backspcActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_backspcActionPerformed
+        String get_previous = tf_calculation.getText();
+        if (get_previous.length()>0) {
+            String newText = get_previous.substring(0, get_previous.length()-1);
+            tf_calculation.setText(newText);
+        }
+    }//GEN-LAST:event_btn_backspcActionPerformed
+
+    private void btn_backspcPropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_btn_backspcPropertyChange
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btn_backspcPropertyChange
+
     /**
      * @param args the command line arguments
      */
@@ -681,6 +757,7 @@ public class calculator_gui extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btn_backspc;
     private javax.swing.JButton btn_brack_cl;
     private javax.swing.JButton btn_brack_op;
     private javax.swing.JButton btn_clear;
