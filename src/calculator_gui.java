@@ -639,7 +639,7 @@ public class calculator_gui extends javax.swing.JFrame {
         if (get_previous.length() != 0){
            char last_char = get_previous.charAt(get_previous.length()-1);
             if (last_char == '/'){
-                tf_answer.setText("Division by Zero");
+                tf_answer.setText("Error: Division by Zero");
             }
             else{
                 get_previous += "0";
