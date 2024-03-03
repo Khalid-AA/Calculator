@@ -1,4 +1,5 @@
-import java.beans.Expression;
+import java.util.Stack;
+import javax.swing.table.DefaultTableModel;
 
 
 public class calculator_gui extends javax.swing.JFrame {
@@ -29,6 +30,8 @@ public class calculator_gui extends javax.swing.JFrame {
         tf_answer = new javax.swing.JTextField();
         jPanel4 = new javax.swing.JPanel();
         btn_clear_history = new javax.swing.JButton();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        jTable1 = new javax.swing.JTable();
         jPanel5 = new javax.swing.JPanel();
         btn_equals = new javax.swing.JButton();
         btn_zero = new javax.swing.JButton();
@@ -102,8 +105,9 @@ public class calculator_gui extends javax.swing.JFrame {
 
         tf_answer.setEditable(false);
         tf_answer.setBackground(new java.awt.Color(51, 51, 51));
-        tf_answer.setFont(new java.awt.Font("Segoe UI", 1, 16)); // NOI18N
+        tf_answer.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
         tf_answer.setForeground(new java.awt.Color(255, 255, 255));
+        tf_answer.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
         tf_answer.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 tf_answerActionPerformed(evt);
@@ -147,21 +151,45 @@ public class calculator_gui extends javax.swing.JFrame {
             }
         });
 
+        jTable1.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "Expression", "Answer"
+            }
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        jTable1.getTableHeader().setReorderingAllowed(false);
+        jScrollPane1.setViewportView(jTable1);
+
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
         jPanel4Layout.setHorizontalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel4Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(btn_clear_history, javax.swing.GroupLayout.DEFAULT_SIZE, 366, Short.MAX_VALUE)
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                    .addComponent(btn_clear_history, javax.swing.GroupLayout.DEFAULT_SIZE, 366, Short.MAX_VALUE))
                 .addContainerGap())
         );
         jPanel4Layout.setVerticalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap()
+                .addComponent(jScrollPane1)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(btn_clear_history)
-                .addContainerGap())
+                .addGap(12, 12, 12))
         );
 
         jPanel5.setBackground(new java.awt.Color(102, 102, 102));
@@ -476,7 +504,7 @@ public class calculator_gui extends javax.swing.JFrame {
         jPanel5Layout.setVerticalGroup(
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel5Layout.createSequentialGroup()
-                .addContainerGap(9, Short.MAX_VALUE)
+                .addContainerGap(12, Short.MAX_VALUE)
                 .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(btn_clear, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -534,7 +562,7 @@ public class calculator_gui extends javax.swing.JFrame {
                 .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, 712, Short.MAX_VALUE)
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -561,20 +589,41 @@ public class calculator_gui extends javax.swing.JFrame {
 
     private void btn_divActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_divActionPerformed
        String get_previous;
-       get_previous = tf_calculation.getText();
-       get_previous = get_previous+"/";
-       tf_calculation.setText(get_previous);        // TODO add your handling code here:
+       // If there is previous answer take it and make it the new input if / operation is used      
+        if (tf_answer.getText().isEmpty()){
+            get_previous = tf_calculation.getText();
+            get_previous += "/";
+            tf_calculation.setText(get_previous);           
+        }
+        else{
+           get_previous = tf_answer.getText();
+           get_previous += "/";
+           tf_calculation.setText(get_previous); 
+           tf_answer.setText("");
+        }
+        // TODO add your handling code here:
     }//GEN-LAST:event_btn_divActionPerformed
 
     private void btn_plusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_plusActionPerformed
        String get_previous;
-       get_previous = tf_calculation.getText();
-       get_previous = get_previous+"+";
-       tf_calculation.setText(get_previous);        // TODO add your handling code here:
+       // If there is previous answer take it and make it the new input if + operation is used      
+        if (tf_answer.getText().isEmpty()){
+            get_previous = tf_calculation.getText();
+            get_previous += "+";
+            tf_calculation.setText(get_previous);           
+        }
+        else{
+           get_previous = tf_answer.getText();
+           get_previous += "+";
+           tf_calculation.setText(get_previous); 
+           tf_answer.setText("");
+        }        // TODO add your handling code here:
     }//GEN-LAST:event_btn_plusActionPerformed
 
     private void btn_clear_historyActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_clear_historyActionPerformed
         // TODO add your handling code here:
+        DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
+        model.setRowCount(0);
     }//GEN-LAST:event_btn_clear_historyActionPerformed
 
     private void btn_oneActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_oneActionPerformed
@@ -587,7 +636,18 @@ public class calculator_gui extends javax.swing.JFrame {
     private void btn_zeroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_zeroActionPerformed
        String get_previous;
        get_previous = tf_calculation.getText();
-       get_previous = get_previous+"0";
+        if (get_previous.length() != 0){
+           char last_char = get_previous.charAt(get_previous.length()-1);
+            if (last_char == '/'){
+                tf_answer.setText("Division by Zero");
+            }
+            else{
+                get_previous += "0";
+            }           
+        }
+        else{
+           get_previous += "0";
+        }
        tf_calculation.setText(get_previous);
     }//GEN-LAST:event_btn_zeroActionPerformed
 
@@ -649,16 +709,34 @@ public class calculator_gui extends javax.swing.JFrame {
 
     private void btn_minusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_minusActionPerformed
        String get_previous;
-       get_previous = tf_calculation.getText();
-       get_previous = get_previous+"-";
-       tf_calculation.setText(get_previous);        // TODO add your handling code here:
+       // If there is previous answer take it and make it the new input if - operation is used
+        if (tf_answer.getText().isEmpty()){
+            get_previous = tf_calculation.getText();
+            get_previous += "-";
+            tf_calculation.setText(get_previous);           
+        }
+        else{
+           get_previous = tf_answer.getText();
+           get_previous += "-";
+           tf_calculation.setText(get_previous); 
+           tf_answer.setText("");
+        }        // TODO add your handling code here:
     }//GEN-LAST:event_btn_minusActionPerformed
 
     private void btn_multActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_multActionPerformed
        String get_previous;
-       get_previous = tf_calculation.getText();
-       get_previous = get_previous+"*";
-       tf_calculation.setText(get_previous);        // TODO add your handling code here:
+       // If there is previous answer take it and make it the new input if * operation is used
+        if (tf_answer.getText().isEmpty()){
+            get_previous = tf_calculation.getText();
+            get_previous += "*";
+            tf_calculation.setText(get_previous);           
+        }
+        else{
+           get_previous = tf_answer.getText();
+           get_previous += "*";
+           tf_calculation.setText(get_previous); 
+           tf_answer.setText("");
+        }         // TODO add your handling code here:
     }//GEN-LAST:event_btn_multActionPerformed
 
     private void btn_dotActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_dotActionPerformed
@@ -669,10 +747,30 @@ public class calculator_gui extends javax.swing.JFrame {
     }//GEN-LAST:event_btn_dotActionPerformed
 
     private void btn_brack_opActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_brack_opActionPerformed
-       String get_previous;
-       get_previous = tf_calculation.getText();
-       get_previous = get_previous+"(";
-       tf_calculation.setText(get_previous);        // TODO add your handling code here:
+        String get_previous;
+       // If there is previous answer take it and make it the new input if ( operation is used
+        if (tf_answer.getText().isEmpty()){
+            get_previous = tf_calculation.getText();
+            if (get_previous.length() != 0){
+                char last_char = get_previous.charAt(get_previous.length()-1);
+                if (last_char == '*' || last_char == '/' || last_char == '+' || last_char == '-'){
+                    get_previous += "(";
+                }
+                else{
+                    get_previous += "*(";
+                }           
+            }
+            else{
+                get_previous += "(";
+            }
+        }
+        else{
+            get_previous = tf_answer.getText();
+            get_previous += "*(";   
+            tf_answer.setText("");
+        }
+        tf_calculation.setText(get_previous);
+                        // TODO add your handling code here:
     }//GEN-LAST:event_btn_brack_opActionPerformed
 
     private void btn_brack_clActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_brack_clActionPerformed
@@ -693,7 +791,8 @@ public class calculator_gui extends javax.swing.JFrame {
        String get_previous;
        get_previous = tf_calculation.getText();
        get_previous = "";
-       tf_calculation.setText(get_previous);        // TODO add your handling code here:
+       tf_calculation.setText(get_previous);
+       tf_answer.setText("");                      // TODO add your handling code here:
     }//GEN-LAST:event_btn_clearActionPerformed
 
     private void tf_calculationActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tf_calculationActionPerformed
@@ -705,10 +804,116 @@ public class calculator_gui extends javax.swing.JFrame {
     }//GEN-LAST:event_tf_answerActionPerformed
 
     private void btn_equalsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_equalsActionPerformed
+        // TODO add your handling code here:
         String get_expression = tf_calculation.getText();
+        //Validate the string, if theire is letters or unwanted characters raise an error
+        for (int i=0; i<get_expression.length(); i++){
+            char c = get_expression.charAt(i);
+            if(Character.isDigit(c) || c=='/' || c=='*' || c=='+' || c=='-' || c=='%' || c=='(' || c==')' || c=='.'){
+                continue;
+            }
+            else{
+                tf_answer.setText("Value Error: Invalid Input");
+            }
+        }    
+        // Dealing with the first character being - ot +
+        char first_char = get_expression.charAt(0);
+        if (first_char == '-' || first_char == '+'){
+            get_expression = '0' + get_expression;
+        }
+        double result = do_calculation(get_expression);   
+        tf_answer.setText(Double.toString(result));
         
+        // Inserting into the table
+        DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
+        model.addRow(new Object[] {tf_calculation.getText(), tf_answer.getText()});        
     }//GEN-LAST:event_btn_equalsActionPerformed
+    public static double do_calculation(String str) {
+        Stack<Double> numberStack = new Stack<>();
+        Stack<Character> operatorStack = new Stack<>();
 
+        for (int i = 0; i < str.length(); i++) {
+            char c = str.charAt(i);
+            if (c == '(') {
+                operatorStack.push(c);
+            } 
+            else if (c == ')') {
+                while (!operatorStack.isEmpty() && operatorStack.peek() != '(') {
+                    char operator = operatorStack.pop();
+                    double num2 = numberStack.pop();
+                    double num1 = numberStack.pop();
+                    numberStack.push(applyOperation(operator, num1, num2));
+                }
+                if (!operatorStack.isEmpty()) {
+                    operatorStack.pop(); // Remove the '('
+                }
+            } 
+            else if (isOperator(c)) {
+                while (!operatorStack.isEmpty() && precedence(c) <= precedence(operatorStack.peek())) {
+                    char operator = operatorStack.pop();
+                    double num2 = numberStack.pop();
+                    double num1 = numberStack.pop();
+                    numberStack.push(applyOperation(operator, num1, num2));
+                }
+                operatorStack.push(c);
+            } 
+            else if (Character.isDigit(c) || c == '.') {
+                int start = i;
+                while (i + 1 < str.length() && (Character.isDigit(str.charAt(i + 1)) || str.charAt(i + 1) == '.')) {
+                    i++;
+                }
+                double num = Double.parseDouble(str.substring(start, i + 1));
+                numberStack.push(num);
+            }
+        }
+
+        while (!operatorStack.isEmpty()) {
+            char operator = operatorStack.pop();
+            double num2 = numberStack.pop();
+            double num1 = numberStack.pop();
+            numberStack.push(applyOperation(operator, num1, num2));
+        }
+
+        return numberStack.pop();
+    }
+
+    public static boolean isOperator(char c) {
+        return c == '+' || c == '-' || c == '*' || c == '/';
+    }
+
+    public static int precedence(char c) {
+        switch (c) {
+            case '+':
+            case '-':
+                return 1;
+            case '*':
+            case '/':
+                return 2;
+            default:
+                return 0;
+        }
+    }
+
+    public static double applyOperation(char operator, double a, double b) {
+        switch (operator) {
+            case '+':
+                return a + b;
+            case '-':
+                return a - b;
+            case '*':
+                return a * b;
+            case '/':
+                return a / b;
+            default:
+                // IllegalArgumentException is a type of exception that indicates 
+                // that a method has been passed an illegal or inappropriate argument.
+                // In here, i am using it so that i don't have an error since switch needs a default value
+                // I have taken care of invalid input in the beginning of this method/function.
+                throw new IllegalArgumentException("Invalid operator: " + operator);
+                
+        }
+    }
+    
     private void btn_backspcActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_backspcActionPerformed
         String get_previous = tf_calculation.getText();
         if (get_previous.length()>0) {
@@ -790,6 +995,8 @@ public class calculator_gui extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel5;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JTable jTable1;
     private javax.swing.JTextField tf_answer;
     private javax.swing.JTextField tf_calculation;
     // End of variables declaration//GEN-END:variables
