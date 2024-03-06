@@ -97,6 +97,7 @@ public class calculator_gui extends javax.swing.JFrame {
         tf_calculation.setFont(new java.awt.Font("Segoe UI", 0, 36)); // NOI18N
         tf_calculation.setForeground(new java.awt.Color(255, 255, 255));
         tf_calculation.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
+        tf_calculation.setCursor(new java.awt.Cursor(java.awt.Cursor.TEXT_CURSOR));
         tf_calculation.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 tf_calculationActionPerformed(evt);
@@ -562,7 +563,7 @@ public class calculator_gui extends javax.swing.JFrame {
                 .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, 712, Short.MAX_VALUE)
+            .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -724,8 +725,8 @@ public class calculator_gui extends javax.swing.JFrame {
     }//GEN-LAST:event_btn_minusActionPerformed
 
     private void btn_multActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_multActionPerformed
-       String get_previous;
-       // If there is previous answer take it and make it the new input if * operation is used
+       String get_previous;   
+        // If there is previous answer take it and make it the new input if * operation is used
         if (tf_answer.getText().isEmpty()){
             get_previous = tf_calculation.getText();
             get_previous += "*";
@@ -781,10 +782,19 @@ public class calculator_gui extends javax.swing.JFrame {
     }//GEN-LAST:event_btn_brack_clActionPerformed
 
     private void btn_percentageActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_percentageActionPerformed
-       String get_previous;
-       get_previous = tf_calculation.getText();
-       get_previous = get_previous+"%";
-       tf_calculation.setText(get_previous);        // TODO add your handling code here:
+        String get_previous;
+        // If there is previous answer take it and make it the new input if + operation is used      
+        if (tf_answer.getText().isEmpty()){
+            get_previous = tf_calculation.getText();
+            get_previous += "%";
+            tf_calculation.setText(get_previous);           
+        }
+        else{
+           get_previous = tf_answer.getText();
+           get_previous += "%";
+           tf_calculation.setText(get_previous); 
+           tf_answer.setText("");
+        }         // TODO add your handling code here:
     }//GEN-LAST:event_btn_percentageActionPerformed
 
     private void btn_clearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_clearActionPerformed
@@ -806,32 +816,66 @@ public class calculator_gui extends javax.swing.JFrame {
     private void btn_equalsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_equalsActionPerformed
         // TODO add your handling code here:
         String get_expression = tf_calculation.getText();
-        //Validate the string, if theire is letters or unwanted characters raise an error
-        for (int i=0; i<get_expression.length(); i++){
-            char c = get_expression.charAt(i);
-            if(Character.isDigit(c) || c=='/' || c=='*' || c=='+' || c=='-' || c=='%' || c=='(' || c==')' || c=='.'){
-                continue;
-            }
-            else{
-                tf_answer.setText("Value Error: Invalid Input");
-            }
-        }    
-        // Dealing with the first character being - ot +
+        // Dealing with the first character being - or +
         char first_char = get_expression.charAt(0);
         if (first_char == '-' || first_char == '+'){
             get_expression = '0' + get_expression;
-        }
-        double result = do_calculation(get_expression);   
-        tf_answer.setText(Double.toString(result));
+        }        
         
+        if (isValidExpression(get_expression)) {
+            // Process the expression to handle '%'
+            get_expression = handlePercentage(get_expression);
+            // Calculate the result and display it
+            double result = do_calculation(get_expression);
+            tf_answer.setText(Double.toString(result));
+        } 
+        else {
+            // Display error message for invalid input
+            tf_answer.setText("Value Error: Invalid Input");
+        }  
+
         // Inserting into the table
         DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
         model.addRow(new Object[] {tf_calculation.getText(), tf_answer.getText()});        
     }//GEN-LAST:event_btn_equalsActionPerformed
+
+    // Validate the string, if theire is letters or unwanted characters raise an error
+    public static boolean isValidExpression(String expression) {
+        for (int i = 0; i < expression.length(); i++) {
+            char c = expression.charAt(i);
+            if (!(Character.isDigit(c) || c == '/' || c == '*' || c == '+' || c == '-' || c == '%' || c == '(' || c == ')' || c == '.')) {
+                return false;
+            }
+        }
+        return true;
+    }    
+    
+    // Handling percentage sign
+    public static String handlePercentage(String expression) {
+        StringBuilder modifiedExpression = new StringBuilder();
+        for (int j = 0; j < expression.length(); j++) {
+            char currentChar = expression.charAt(j);
+            if (currentChar == '%') {
+                // Find the digits preceding the '%'
+                StringBuilder digits = new StringBuilder();
+                int x = j - 1;
+                while (x >= 0 && (Character.isDigit(expression.charAt(x)) || expression.charAt(x) == '.')) {
+                    digits.append(expression.charAt(x));
+                    x--;
+                }
+                // Append the division expression with parentheses (digits/100)
+                modifiedExpression.replace(x+1, currentChar, "(" + digits.reverse() + "/100)");
+            } else {
+                modifiedExpression.append(currentChar);
+            }
+        }
+        return modifiedExpression.toString();
+    }
+    
     public static double do_calculation(String str) {
         Stack<Double> numberStack = new Stack<>();
         Stack<Character> operatorStack = new Stack<>();
-
+        // BODMAS rules applied
         for (int i = 0; i < str.length(); i++) {
             char c = str.charAt(i);
             if (c == '(') {
