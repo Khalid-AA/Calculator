@@ -170,7 +170,10 @@ public class calculator_gui extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
+        jTable1.setAlignmentX(5.0F);
         jTable1.setGridColor(new java.awt.Color(0, 0, 0));
+        jTable1.setRowHeight(30);
+        jTable1.setRowMargin(5);
         jTable1.setShowGrid(true);
         jTable1.getTableHeader().setReorderingAllowed(false);
         jScrollPane1.setViewportView(jTable1);
