@@ -867,22 +867,22 @@ public class calculator_gui extends javax.swing.JFrame {
     
     // Handling percentage sign
     public static String handlePercentage(String expression) {
-        StringBuilder modifiedExpression = new StringBuilder();
-        for (int j = 0; j < expression.length(); j++) {
-            char currentChar = expression.charAt(j);
-            if (currentChar == '%') {
-                // Find the digits preceding the '%'
-                StringBuilder digits = new StringBuilder();
-                int x = j - 1;
-                while (x >= 0 && (Character.isDigit(expression.charAt(x)) || expression.charAt(x) == '.')) {
-                    digits.append(expression.charAt(x));
-                    x--;
-                }
-                // Append the division expression with parentheses (digits/100)
-                modifiedExpression.replace(x+1, currentChar, "(" + digits.reverse() + "/100)");
-            } else {
-                modifiedExpression.append(currentChar);
+        StringBuilder modifiedExpression = new StringBuilder(expression);
+        int index = modifiedExpression.indexOf("%");
+        
+        while (index != -1) {
+            // Find the digits preceding the '%'
+            StringBuilder digits = new StringBuilder();
+            int x = index - 1;
+            while (x >= 0 && (Character.isDigit(modifiedExpression.charAt(x)) || modifiedExpression.charAt(x) == '.')) {
+                digits.append(modifiedExpression.charAt(x));
+                x--;
             }
+            // Append the division expression with parentheses (digits/100)
+            modifiedExpression.replace(x + 1, index + 1, "(" + digits.reverse() + "/100)");
+            
+            // Look for the next occurrence of '%'
+            index = modifiedExpression.indexOf("%", index + 1);
         }
         return modifiedExpression.toString();
     }
