@@ -371,16 +371,31 @@ public class calculator_gui extends javax.swing.JFrame {
         btn_sin.setText("sin");
         btn_sin.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
         btn_sin.setBorderPainted(false);
+        btn_sin.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_sinActionPerformed(evt);
+            }
+        });
 
         btn_cos.setFont(new java.awt.Font("Segoe UI", 0, 36)); // NOI18N
         btn_cos.setText("cos");
         btn_cos.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
         btn_cos.setBorderPainted(false);
+        btn_cos.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_cosActionPerformed(evt);
+            }
+        });
 
         btn_tan.setFont(new java.awt.Font("Segoe UI", 0, 36)); // NOI18N
         btn_tan.setText("tan");
         btn_tan.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
         btn_tan.setBorderPainted(false);
+        btn_tan.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_tanActionPerformed(evt);
+            }
+        });
 
         btn_div.setFont(new java.awt.Font("Segoe UI", 0, 36)); // NOI18N
         btn_div.setForeground(new java.awt.Color(255, 51, 102));
@@ -984,6 +999,18 @@ public class calculator_gui extends javax.swing.JFrame {
     private void btn_backspcPropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_btn_backspcPropertyChange
         // TODO add your handling code here:
     }//GEN-LAST:event_btn_backspcPropertyChange
+
+    private void btn_sinActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_sinActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btn_sinActionPerformed
+
+    private void btn_cosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_cosActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btn_cosActionPerformed
+
+    private void btn_tanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_tanActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btn_tanActionPerformed
 
     /**
      * @param args the command line arguments
